@@ -7,4 +7,4 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = Farmer
-        fields = ('username', 'first_name', 'last_name', 'email', 'phone_number',)
+        fields = ('username', 'first_name', 'last_name', 'email', 'phone_number','location')

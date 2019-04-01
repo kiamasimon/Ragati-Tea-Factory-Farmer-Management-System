@@ -14,7 +14,8 @@
             <strong>Add a Sale</strong>
         </div>
         <div class="card-body">
-            <form action="{%url 'Employee:add_sale'%}">
+            <form action="{%url 'Employee:add_sale'%}" method="post">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Select a farmer</label>
                     <select class="form-control" id="exampleFormControlSelect1">
