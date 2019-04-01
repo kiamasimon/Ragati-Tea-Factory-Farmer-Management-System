@@ -1,0 +1,75 @@
+{% extends 'employee/base.html' %}
+{% load staticfiles %}
+
+{% block title %}QED Dashboard{% endblock %}
+
+{% block additional_styles %}
+
+{% endblock %}
+{% block portal_content %}
+
+    <div class="col-sm-10" style="margin:auto; margin-top:60px;">
+              <div class="card">
+                <div class="card-header">
+                  <strong>Farmers</strong>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        <div class="alert alert-success">
+                            {% for m in messages %}
+                                <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</li>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                  <div class="table-flip-scroll">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Status</th>
+                          <th>Last Login</th>
+                          <th>Edit</th>
+                          <th>Date Joined</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for farmer in farmers %}
+                            <tr>
+                                <td>{{ farmer.first_name }}</td>
+                                <td>{{ farmer.email }}</td>
+                                <td>
+                                     {% if farmer.is_active %}
+                                         <a href="{% url 'Employee:deactivate_farmer' farmer.user_ptr_id %}" class="btn btn-danger">Deactivate</a>
+                                     {% else %}
+                                         <a href="{% url 'Employee:activate_farmer' farmer.user_ptr_id %}" class="btn btn-success">Activate</a>
+                                     {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if farmer.last_login == None %}
+                                        Never Logged in
+                                    {% else %}
+                                        {{ farmer.last_login }}
+                                    {% endif %}
+                                </td>
+                            <td>
+                                <a href=""><i class="fas fa-edit"></i></a>
+                            </td>
+                                <td>
+
+                                    {{ farmer.date_joined }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% block additional_scripts %}
+
+{% endblock %}
+{% endblock %}
