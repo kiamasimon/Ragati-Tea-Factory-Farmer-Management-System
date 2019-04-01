@@ -1,0 +1,63 @@
+{% extends 'employee/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Farmer Sales{% endblock %}
+
+{% block additional_styles %}
+
+{% endblock %}
+{% block portal_content %}
+
+<div class="col-sm-10" style="margin:auto; margin-top:60px;">
+    <div class="card">
+        <div class="card-header">
+            <strong>Add a Sale</strong>
+        </div>
+        <div class="card-body">
+            <form action="{%url 'Employee:add_sale'%}">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Select a farmer</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        {%for farmer in farmers %}
+                        <option value="{{farmer.id}}">{{farmer.first_name}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="kg_of_tea">Farmers Amount of Tea in Kgs</label>
+                    <input type="number" class="calc" id="kg_of_tea"  name="kg_of_tea" placeholder="Numbers Only">
+                </div>
+
+                <div class="form-group">
+                    <label for="unit_cost">Unit Cost(Ksh)</label>
+                    <input type="number" class="calc"  id="unit_cost" name="unit_cost" placeholder="Numbers Only">
+                </div>
+
+                <div class="form-group">
+                    <label for="total">Total</label>
+                    <input type="number" class="form-control" onchange="calculateAmount(value1,value2)" id="total" name="total" placeholder="Numbers Only">
+                </div>
+
+                <div class="form-group">
+                    <label for="employee_id">Served By:</label>
+                    <input type="number" class="form-control" value="{{user.id}}" id="employee_id" name="employee_id" placeholder="name@example.com" disabled>
+                </div>
+
+                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block additional_scripts %}
+<script>
+function calculateAmount(val1,val2)
+{ var tot_price = val1 * val2;
+//display the result
+var divobj = document.getElementById('total');
+divobj.value = tot_price;
+}
+</script>
+{% endblock %}
+{% endblock %}

@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from accounts.models import Farmer, Sale
 from django.contrib import messages
 
+from employee.forms import AddSaleForm
+
 
 def dashboard(request):
     return render(request, 'employee/dashboard.html')
@@ -52,4 +54,22 @@ def farmer_sales(request, pk):
         'sales': sales,
         'farmer': farmer
     }
-    return  render(request, 'employee/farmer_sales.html', context)
+    return render(request, 'employee/farmer_sales.html', context)
+
+
+def add_sale(request):
+    farmers = Farmer.objects.all()
+
+    if request.method == 'POST':
+        form = AddSaleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Accounts:home')
+    else:
+            form = AddSaleForm()
+
+    return render(request, 'employee/add_sale.html', {'form': form, 'farmers': farmers})
+
+
+
+

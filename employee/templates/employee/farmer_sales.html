@@ -12,7 +12,9 @@
 <div class="col-sm-10" style="margin:auto; margin-top:60px;">
               <div class="card">
                 <div class="card-header">
-                  <strong>List of Farmers With Sales Records</strong>
+                    {% for farmer in farmer%}
+                    <strong >List of Sales belonging to <strong style="color: #2d8f02;">{{farmer.first_name}} {{farmer.last_name}}</strong></strong>
+                    {%endfor%}
                 </div>
                 <div class="card-body">
                     {% if messages %}
@@ -29,24 +31,30 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Day of Sale</th>
-                            <th>View Sales</th>
+                            <th>Kgs Sold</th>
+                            <th>Price per Kg</th>
+                            <th>Total in Ksh</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {% for farmer in farmers %}
+                        {% for farmer in farmer %}
                             <tr>
                                 <td>{{ farmer.first_name }}</td>
                                 <td>{{ farmer.email }}</td>
-                                <td>
-                                    {{ farmer.date_joined }}
-                                </td>
-                                <td><a href="{%url 'Employee:farmer_sales' farmer.id %}">View Sales</a></td>
+                                {% endfor %}
+
+                                {%for sale in sales %}
+                                <td>{{ sale.created_at }}</td>
+                                <td>{{ sale.kg_of_tea}}</td>
+                                <td>{{ sale.unit_cost}}</td>
+                                <td>{{ sale.total}}</td>
+                                {%endfor%}
                             </tr>
-                        {% endfor %}
 
                       </tbody>
                     </table>
                   </div>
+                    <strong>Total</strong>
                 </div>
               </div>
             </div>

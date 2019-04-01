@@ -3,19 +3,28 @@
 
 {% block content %}
 {% for post in posts %}
-<div class="post">
-    <div class="date">
-        <p>Published: {{ post.published_date }}</p>
-    </div>
-    <h2><a href="{% url 'Blog:post_detail' pk=post.pk %}">{{post.title }}</a></h2>
-    <img src="{{post.image}}">
-    <p>{{post.image}}</p>
-    <p>{{ post.text }}</p>
-    <a href="{% url 'Blog:post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
 
-    {% for comment in post.comments.all %}
-    <p><strong>Author::{{ comment.author }}</strong></p>
-    {% endfor %}
+<div class="col-12" style="margin-top:20px;">
+    <div class="card">
+        <div class="card-header">
+            <strong>News and Posts</strong>
+        </div>
+        <div class="card-body">
+            <div class="post">
+                <div class="date">
+                    <p>Published: {{ post.published_date }}</p>
+                </div>
+                <h2><a href="{% url 'Blog:post_detail' pk=post.pk %}">{{post.title }}</a></h2>
+                <img src="{{post.image}}">
+                <p>{{post.image}}</p>
+                <p>{{ post.text }}</p>
+                <a href="{% url 'Blog:post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+                {% for comment in post.comments.all %}
+                <p><strong>Author::{{ comment.author }}</strong></p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endfor %}
 {% endblock %}
