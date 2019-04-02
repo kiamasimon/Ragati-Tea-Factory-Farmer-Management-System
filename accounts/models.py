@@ -29,3 +29,6 @@ class Sale(models.Model):
 
     class Meta:
         verbose_name = 'Sale'
+
+    def year(self):
+        return self.created_at.year()

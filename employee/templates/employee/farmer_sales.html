@@ -38,17 +38,16 @@
                       </thead>
                       <tbody>
                         {% for farmer in farmer %}
+                        {%for sale in sales %}
                             <tr>
                                 <td>{{ farmer.first_name }}</td>
                                 <td>{{ farmer.email }}</td>
-                                {% endfor %}
-
-                                {%for sale in sales %}
                                 <td>{{ sale.created_at }}</td>
                                 <td>{{ sale.kg_of_tea}}</td>
                                 <td>{{ sale.unit_cost}}</td>
                                 <td>{{ sale.total}}</td>
                                 {%endfor%}
+                                {% endfor %}
                             </tr>
 
                       </tbody>

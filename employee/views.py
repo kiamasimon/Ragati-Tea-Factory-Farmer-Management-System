@@ -76,7 +76,7 @@ def add_sale(request):
     return render(request, 'employee/add_sale.html', {'form': form, 'farmers': farmers})
 
 
-def signup(request):
+def admin_signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         print(form)
@@ -88,7 +88,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('')
+            return redirect('Employee:dashboard')
     else:
         form = SignUpForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+    return render(request, 'employee/sign_up.html', {'form': form})

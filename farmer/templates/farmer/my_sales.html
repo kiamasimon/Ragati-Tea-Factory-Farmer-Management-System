@@ -1,0 +1,50 @@
+{% extends 'farmer/base.html' %}
+{% load staticfiles %}
+
+{% block portal_content %}
+
+{% regroup sales by week as sales_by_week%}
+{%for week in sales_by_week%}
+<div class="col-sm-10" style="margin:auto; margin-top:60px;">
+              <div class="card">
+                <div class="card-header">
+                    <strong>Sales for week {{week.grouper}} {% for sale in week.list%} {{sale.year}} {%endfor%}</strong>
+                </div>
+
+                  <div class="card-body">
+                      <div class="table-flip-scroll">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                            <th>Kgs Of Tea</th>
+                            <th>Unit Price</th>
+                            <th>Date Of Sale</th>
+                            <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for sale in week.list%}
+                            <tr>
+                                <td>{{ sale.kg_of_tea }}</td>
+                                <td>{{ sale.unit_cost }}</td>
+                                <td>{{ sale.created_at }}</td>
+                                <td>{{ sale.total}}</td>
+                            </tr>
+                      {%endfor%}
+                      </tbody>
+                    </table>
+                  </div>
+                  </div>
+              </div>
+</div>
+{%endfor%}
+{% for sale in week.list%}
+<h1>{{sale.kg_of_tea}}</h1>
+{%endfor%}
+
+
+{% block additional_scripts %}
+
+  {% endblock %}
+
+{%endblock%}

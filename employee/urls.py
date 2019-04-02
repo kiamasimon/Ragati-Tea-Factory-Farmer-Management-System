@@ -10,5 +10,6 @@ urlpatterns = [
     path('farmer/activate/<int:farmer_id>', views.activate_farmer, name='activate_farmer'),
     path('sales_list', views.sales_list, name="sales_list"),
     path('farmer_sales/<int:pk>', views.farmer_sales, name='farmer_sales'),
-    path('add_sale', views.add_sale, name='add_sale')
+    path('add_sale', views.add_sale, name='add_sale'),
+    path('sign_up', views.admin_signup, name='sign_up')
 ]

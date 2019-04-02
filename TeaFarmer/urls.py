@@ -25,5 +25,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('blog/', include('blog_web.urls')),
     path('employee/', include('employee.urls')),
+    path('farmer/',  include('farmer.urls')),
     path('', accounts.views.dashboard, name='home')
 ]

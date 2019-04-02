@@ -21,7 +21,7 @@ def user_login(request):
                 if Farmer.objects.filter(user_ptr_id=user.id).exists():
                     return redirect('Blog:post_list')
                 if Employee.objects.filter(user_ptr_id=user.id).exists():
-                    return redirect('Accounts:home')
+                    return redirect('Employee:dashboard')
             else:
                 msg.append('You account has been deactivated!')
     else:
