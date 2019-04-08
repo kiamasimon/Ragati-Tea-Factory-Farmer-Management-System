@@ -8,7 +8,7 @@ class AddSaleForm(ModelForm):
 
     class Meta:
         model = Sale
-        fields = ('farmer_id', 'kg_of_tea', 'unit_cost', 'total','employee_id',)
+        fields = ('farmer_id', 'kg_of_tea', 'unit_cost', 'total', 'employee_id',)
 
 
 class SignUpForm(UserCreationForm):

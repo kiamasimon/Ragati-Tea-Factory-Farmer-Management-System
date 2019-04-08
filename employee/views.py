@@ -1,14 +1,10 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from accounts.models import Farmer, Sale
+from accounts.models import Farmer, Sale, Employee
 from django.contrib import messages
 
 from employee.forms import AddSaleForm, SignUpForm
-
-
-def dashboard(request):
-    return render(request, 'employee/dashboard.html')
 
 
 def list_farmers(request):
@@ -69,10 +65,10 @@ def add_sale(request):
         print(form)
         if form.is_valid():
             form.save()
-            return redirect('Accounts:home')
+            messages.success(request, 'Sale added successfully')
+            return redirect('Employee:add_sale')
     else:
             form = AddSaleForm()
-
     return render(request, 'employee/add_sale.html', {'form': form, 'farmers': farmers})
 
 
@@ -92,3 +88,13 @@ def admin_signup(request):
     else:
         form = SignUpForm()
     return render(request, 'employee/sign_up.html', {'form': form})
+
+
+@staff_member_required()
+def dashboard(request):
+    context = {
+        'sales': Sale.objects.count(),
+        'farmers': Farmer.objects.count(),
+        'employees': Employee.objects.count(),
+    }
+    return render(request, 'employee/dashboard.html', context)

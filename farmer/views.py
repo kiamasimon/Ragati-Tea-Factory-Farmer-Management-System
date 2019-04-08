@@ -34,10 +34,17 @@ def individual_sales(request):
     sale = Sale.objects.filter(farmer_id=user.id)
 
     sales = sale.annotate(week=Week('created_at')).values('week', 'kg_of_tea', 'unit_cost', 'created_at').annotate(total=Sum('total')).order_by("week")
+
+    sum_up = sale.annotate(week=Week('created_at')).values('week').annotate(total=Sum('total')).order_by("week")
     print(sales)
+    print(sum_up)
 
     context = {
-         'sales': sales
+        'sales': sales,
+        'sum_up': sum_up
     }
     return render(request, 'farmer/my_sales.html', context)
+
+
+
 

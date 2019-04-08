@@ -19,7 +19,7 @@ def user_login(request):
             if user.is_active:
                 login(request, user)
                 if Farmer.objects.filter(user_ptr_id=user.id).exists():
-                    return redirect('Blog:post_list')
+                    return redirect('Farmer:my_sales')
                 if Employee.objects.filter(user_ptr_id=user.id).exists():
                     return redirect('Employee:dashboard')
             else:

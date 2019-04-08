@@ -24,16 +24,24 @@
                       </thead>
                       <tbody>
                       {% for sale in week.list%}
-                            <tr>
-                                <td>{{ sale.kg_of_tea }}</td>
-                                <td>{{ sale.unit_cost }}</td>
-                                <td>{{ sale.created_at }}</td>
-                                <td>{{ sale.total}}</td>
+                      <tr>
+                          <td>{{ sale.kg_of_tea }}</td>
+                          <td>{{ sale.unit_cost }}</td>
+                          <td>{{ sale.created_at }}</td>
+                          <td>{{ sale.total}}</td>
                             </tr>
                       {%endfor%}
                       </tbody>
                     </table>
                   </div>
+                      {% for sum in sum_up %}
+                      {% if sum.week == week.grouper %}
+                      <strong>Total earnings for the week are {{sum.total}}Ksh</strong>
+                      {%endif%}
+                      {%endfor%}
+                      <form method="post" action="">
+                          <button class="btn btn-info my-4 btn-block" style="width:15%;">Print Report</button>
+                      </form>
                   </div>
               </div>
 </div>

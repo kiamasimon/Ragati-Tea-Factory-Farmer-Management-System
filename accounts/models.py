@@ -19,11 +19,12 @@ class Employee(get_user_model()):
 
 
 class Sale(models.Model):
-    farmer_id = models.ForeignKey(Farmer, related_name='farmer', blank=True, null=True, on_delete=models.CASCADE)
-    kg_of_tea = models.IntegerField()
-    unit_cost = models.IntegerField()
-    total = models.IntegerField()
-    employee_id = models.ForeignKey(Employee, related_name='employee', on_delete=models.CASCADE)
+    farmer_id = models.ForeignKey(Farmer, related_name='farmer',unique=False, blank=True, null=True,
+                                  on_delete=models.CASCADE)
+    kg_of_tea = models.IntegerField(unique=False)
+    unit_cost = models.IntegerField(unique=False)
+    total = models.IntegerField(unique=False)
+    employee_id = models.ForeignKey(Employee, unique=False, related_name='employee', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
