@@ -1,0 +1,67 @@
+{% extends 'employee/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Tea Pricing{% endblock %}
+
+{% block portal_content %}
+
+<div class="col-sm-5 float" style="margin:auto; margin-top:60px;">
+              <div class="card">
+                <div class="card-header">
+                    <form method="post" action="{%url 'Employee:add_tea_pricing'%}">
+                        {%csrf_token%}
+                          <button class="btn btn-info my-2 btn-block float-right" style="width:auto;">Add Weekly Price</button>
+                      </form>
+                </div>
+              </div>
+</div>
+
+
+{% regroup tea_prices by week as tea_prices_by_week%}
+{%for week in tea_prices_by_week%}
+<div class="col-sm-10" style="margin:auto; margin-top:60px;">
+              <div class="card">
+                <div class="card-header">
+                    <strong>Tea prices for week {{week.grouper}} {% for tea_price in week.list%} {{tea_price.year}} {%endfor%}</strong>
+                </div>
+
+                  <div class="card-body">
+                      <div class="table-flip-scroll">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                            <th>Tea Type</th>
+                            <th>Price per Kg</th>
+                            <th>Date Updated</th>
+                            <th>Updated By</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for tea_price in week.list%}
+                      <tr>
+                          <td>{{ tea_price.tea_type}}</td>
+                          <td>{{ tea_price.price }}</td>
+                          <td>{{ tea_price.created_at }}</td>
+                          <td>{{ tea_price.employee}}</td>
+                            </tr>
+                      {%endfor%}
+                      </tbody>
+                    </table>
+                  </div>
+                  </div>
+              </div>
+</div>
+{%endfor%}
+
+
+{% block additional_scripts %}
+<script>
+function calculateAmount(val1,val2)
+{ var tot_price = val1 * val2;
+//display the result
+var divobj = document.getElementById('total');
+divobj.value = tot_price;
+}
+</script>
+{% endblock %}
+{% endblock %}

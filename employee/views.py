@@ -1,10 +1,12 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
+from django.db.models import Sum
 from django.shortcuts import render, redirect
-from accounts.models import Farmer, Sale, Employee
+from accounts.models import Farmer, Sale, Employee, Tea
 from django.contrib import messages
 
-from employee.forms import AddSaleForm, SignUpForm
+from employee.forms import AddSaleForm, SignUpForm, ChangeTeaPricesForm
+from farmer.views import Week
 
 
 def list_farmers(request):
@@ -98,3 +100,26 @@ def dashboard(request):
         'employees': Employee.objects.count(),
     }
     return render(request, 'employee/dashboard.html', context)
+
+
+def tea_prices(request):
+    tea = Tea.objects.all()
+    tea_prices = tea.annotate(week=Week('created_at')).values('week', 'tea_type', 'price', 'created_at', 'employee').order_by("week")
+    context = {
+        'tea_prices': tea_prices
+    }
+    return render(request, 'employee/tea_prices.html', context)
+
+
+def add_tea_pricing(request):
+    if request.method == 'POST':
+        form = ChangeTeaPricesForm(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Tea Price changed successfully')
+            return redirect('Employee:add_tea_pricing')
+    else:
+        form = ChangeTeaPricesForm()
+    return render(request, 'employee/add_tea_pricing.html', {'form': form})
+

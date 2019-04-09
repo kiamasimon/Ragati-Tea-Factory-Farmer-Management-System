@@ -11,5 +11,7 @@ urlpatterns = [
     path('sales_list', views.sales_list, name="sales_list"),
     path('farmer_sales/<int:pk>', views.farmer_sales, name='farmer_sales'),
     path('add_sale', views.add_sale, name='add_sale'),
-    path('sign_up', views.admin_signup, name='sign_up')
+    path('sign_up', views.admin_signup, name='sign_up'),
+    path('tea_prices', views.tea_prices, name='tea_prices'),
+    path('add_tea_pricing', views.add_tea_pricing, name='add_tea_pricing')
 ]

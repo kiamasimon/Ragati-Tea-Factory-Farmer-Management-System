@@ -5,5 +5,6 @@ from farmer import views
 app_name = 'Farmer'
 urlpatterns = [
     path('index', views.index, name='index'),
-    path('my_sales', views.individual_sales, name="my_sales")
+    path('my_sales', views.individual_sales, name='my_sales'),
+    path('tea_prices', views.tea_prices, name='tea_prices')
 ]

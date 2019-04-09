@@ -18,12 +18,11 @@
 
 	 <!-- Sidebar -->
     <div class="bg-dark border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading"><a href="{%url 'Employee:list_farmers'%}">Ragati Tea Factory</a></div>
+      <div class="sidebar-heading"><a href="{%url 'Farmer:my_sales'%}">Ragati Tea Factory</a></div>
       <div class="list-group list-group-flush">
-        <a href="{%url 'Employee:list_farmers'%}" class="list-group-item list-group-item-action bg-light">My Sales</a>
-        <a href="{%url 'Employee:add_sale'%}" class="list-group-item list-group-item-action bg-light">Add Sale</a>
-        <a href="{%url 'Employee:sales_list'%}" class="list-group-item list-group-item-action bg-light">View Sales</a>
-        <a href="{%url 'Blog:post_list'%}" class="list-group-item list-group-item-action bg-light">Manage Blog</a>
+        <a href="{%url 'Farmer:my_sales'%}" class="list-group-item list-group-item-action bg-light">My Sales</a>
+        <a href="{%url 'Blog:post_list'%}" class="list-group-item list-group-item-action bg-light">News and Posts</a>
+        <a href="{%url 'Farmer:tea_prices'%}" class="list-group-item list-group-item-action bg-light">Tea Prices</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
       </div>
     </div>
@@ -38,17 +37,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" href="{%url 'Farmer:tea_prices'%}">Pricing</a>
       </li>
     </ul>
   </div>

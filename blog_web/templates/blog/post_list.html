@@ -15,7 +15,7 @@
                     <p>Published: {{ post.published_date }}</p>
                 </div>
                 <h2><a href="{% url 'Blog:post_detail' pk=post.pk %}">{{post.title }}</a></h2>
-                <img src="{{post.image}}">
+                <img class="img-thumbnail rounded mx-auto d-block" style="max-width:50%;" src="{{post.post_image.url}}">
                 <p>{{post.image}}</p>
                 <p>{{ post.text }}</p>
                 <a href="{% url 'Blog:post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>

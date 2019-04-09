@@ -11,7 +11,7 @@ class Post(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
-    image = models.FileField(upload_to='static/images', null=True)
+    post_image = models.FileField(upload_to='gallery', null=True)
 
 
     def publish(self):
