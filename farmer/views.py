@@ -1,7 +1,9 @@
 from django.db import models
 from django.db.models import Func, Sum
+from django.http import HttpResponse
 from django.shortcuts import render
 from accounts.models import Sale, Tea
+from employee.utils import render_to_pdf
 
 
 def index(request):
@@ -40,9 +42,14 @@ def individual_sales(request):
 
     context = {
         'sales': sales,
-        'sum_up': sum_up
+        'sum_up': sum_up,
     }
-    return render(request, 'farmer/my_sales.html', context)
+
+    if request.method == 'POST':
+        pdf = render_to_pdf('farmer/my_sales.html')
+        return HttpResponse(pdf, content_type='application/pdf')
+    else:
+        return render(request, 'farmer/my_sales.html', context)
 
 
 def tea_prices(request):

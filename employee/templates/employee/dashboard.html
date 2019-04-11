@@ -4,10 +4,10 @@
 {% block portal_content %}
 
 <div class="row">
-  <div class="col-sm-3" style="margin:auto; margin-top:60px;">
+  <div class="col-sm-3" style="margin:auto; margin-top:20px;">
     <div class="card">
         <div class="card-header">
-          <strong>Total Number of Company Employees</strong>
+          <small>Total Number of Company Employees</small>
         </div>
           <div class="card-body">
             <strong>Employees: {{employees}}</strong>
@@ -15,10 +15,10 @@
     </div>
   </div>
 
-  <div class="col-sm-3" style="margin:auto; margin-top:60px;">
+  <div class="col-sm-3" style="margin:auto; margin-top:20px;">
     <div class="card">
         <div class="card-header">
-          <strong>Total Number of Registered Farmers</strong>
+          <small>Total Number of Registered Farmers</small>
         </div>
           <div class="card-body">
             <strong>Farmers: {{farmers}}</strong>
@@ -26,10 +26,10 @@
     </div>
   </div>
 
-  <div class="col-sm-3" style="margin:auto; margin-top:60px;">
+  <div class="col-sm-3" style="margin:auto; margin-top:20px;">
     <div class="card">
         <div class="card-header">
-          <strong>Total Number of Purchases Made</strong>
+          <small>Total Number of Purchases Made</small>
         </div>
           <div class="card-body">
             <strong>Sales: {{sales}}</strong>
@@ -38,9 +38,122 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-sm-5" style="margin-top:20px; margin-left:46px;">
+    <div class="card">
+        <div class="card-header">
+        </div>
+      <div class="card-body">
+        <canvas id="myChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-5" style="margin-top:20px; margin-left:46px;">
+    <div class="card">
+        <div class="card-header">
+        </div>
+      <div class="card-body">
+        <canvas id="sales" width="400" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 {% block additional_scripts %}
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Sales', 'Employees', 'Farmers'],
+        datasets: [{
+            label: 'Farmer,Employee and Sales Analysis',
+            data: [{{sales}}, {{employees}}, {{farmers}}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
 
+<script>
+var ctx = document.getElementById('sales').getContext('2d');
+var sales = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        datasets: [{
+            label: 'Farmer,Employee and Sales Analysis',
+            data: [
+            {%for month in s%}{%if month.month == 1%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 2%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 3%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 4%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 5%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 6%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 7%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 8%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 9%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 10%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 11%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {%for month in s%}{%if month.month == 12%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            ],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
   {% endblock %}
 
 {%endblock%}

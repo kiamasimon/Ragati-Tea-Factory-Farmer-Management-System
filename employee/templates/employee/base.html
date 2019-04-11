@@ -5,6 +5,8 @@
 	<title>{% block title %}Ragati Dashboard{% endblock %}</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/simple-sidebar.css' %}">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   {% block additional_styles %}
 
   {% endblock %}
@@ -17,8 +19,8 @@
 <div class="d-flex" id="wrapper">
 
 	 <!-- Sidebar -->
-    <div class="bg-dark border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading"><a href="{%url 'Employee:dashboard'%}">Ragati Tea Factory</a></div>
+    <div class=" border-right bg-light" id="sidebar-wrapper">
+      <a class="nav-link" href="#"><img src="{%static 'accounts/images/logo.png'%}" style="width:31%;"></a>
       <div class="list-group list-group-flush">
         <a href="{%url 'Employee:list_farmers'%}" class="list-group-item list-group-item-action bg-light">Manage Farmers</a>
         <a href="{%url 'Employee:add_sale'%}" class="list-group-item list-group-item-action bg-light">Add Sale</a>
@@ -31,8 +33,8 @@
 
 
 <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <button class="btn btn-primary" id="menu-toggle">Menu</button>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background:#19341a">
+      <i class="fas fa-bars fa-3x" style="color:#fab80a;" id="menu-toggle"></i>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -82,6 +84,7 @@
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 <script>
     $("#menu-toggle").click(function(e) {
       e.preventDefault();

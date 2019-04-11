@@ -1,12 +1,12 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.shortcuts import render, redirect
 from accounts.models import Farmer, Sale, Employee, Tea
 from django.contrib import messages
 
 from employee.forms import AddSaleForm, SignUpForm, ChangeTeaPricesForm
-from farmer.views import Week
+from farmer.views import Week, Month
 
 
 def list_farmers(request):
@@ -94,10 +94,16 @@ def admin_signup(request):
 
 @staff_member_required()
 def dashboard(request):
+    sales_list = Sale.objects.all()
+    s = sales_list.annotate(month=Month('created_at')).values('month').annotate(monthly_sales=Count('id')).order_by("month")
+
+
+    print(s)
     context = {
         'sales': Sale.objects.count(),
         'farmers': Farmer.objects.count(),
         'employees': Employee.objects.count(),
+        's': s,
     }
     return render(request, 'employee/dashboard.html', context)
 

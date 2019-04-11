@@ -5,7 +5,7 @@
 
 {% block portal_content %}
 
-<div class="col-sm-5 float" style="margin:auto; margin-top:60px;">
+<div class="col-sm-3 float" style="margin:auto; margin-top:30px;">
               <div class="card">
                 <div class="card-header">
                     <form method="post" action="{%url 'Employee:add_tea_pricing'%}">
@@ -17,9 +17,9 @@
 </div>
 
 
-{% regroup tea_prices by week as tea_prices_by_week%}
-{%for week in tea_prices_by_week%}
-<div class="col-sm-10" style="margin:auto; margin-top:60px;">
+<div class="col-sm-10" style="margin:auto; margin-top:6px;">
+    {% regroup tea_prices by week as tea_prices_by_week%}
+    {%for week in tea_prices_by_week%}
               <div class="card">
                 <div class="card-header">
                     <strong>Tea prices for week {{week.grouper}} {% for tea_price in week.list%} {{tea_price.year}} {%endfor%}</strong>

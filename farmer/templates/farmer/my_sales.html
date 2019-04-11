@@ -39,7 +39,8 @@
                       <strong>Total earnings for the week are {{sum.total}}Ksh</strong>
                       {%endif%}
                       {%endfor%}
-                      <form method="post" action="">
+                      <form method="post" action="{%url 'Farmer:my_sales'%}">
+                          {%csrf_token%}
                           <button class="btn btn-info my-4 btn-block" style="width:15%;">Print Report</button>
                       </form>
                   </div>
