@@ -1,0 +1,52 @@
+{% extends 'employee/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Edit Tea Pricing{% endblock %}
+
+{% block portal_content %}
+
+<div class="col-sm-5 float" style="margin:auto; margin-top:60px;">
+              <div class="card">
+                <div class="card-header">
+
+                </div>
+
+                  <div class="card-body">
+                      {% if messages %}
+                        <div class="alert alert-success">
+                            {% for m in messages %}
+                                <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}{{ m }}</li>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                      <form method="post" action="{%url 'Employee:edit_tea_pricing' tea_instance.id%}">
+                          {%csrf_token%}
+                          <div class="form-group">
+                              <label for="tea_type">Tea Type</label>
+                              <select type="text" class="form-control" name="tea_type" id="tea_type">
+                                  {% for t in tea %}
+                                      <option value="{{ tea_instance.tea_type}}" {% if t.tea_type == tea_instance.tea_type %} selected {% endif %}>{{ t.get_tea_type_display}}</option>
+                                  {% endfor %}
+                              </select>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="price">Tea Price</label>
+                              <input type="number" class="form-control" value="{{ tea_instance.price }}" name="price" id="price" required>
+                          </div>
+
+                          <div class="form-group" hidden>
+                              <label for="employee">Employee</label>
+                              <input type="number" class="form-control" value="{{ request.user.id }}" name="employee" id="employee" required>
+                          </div>
+                          <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Submit</button>
+                      </form>
+                  </div>
+              </div>
+</div>
+
+{% block additional_scripts %}
+
+{% endblock %}
+{% endblock %}

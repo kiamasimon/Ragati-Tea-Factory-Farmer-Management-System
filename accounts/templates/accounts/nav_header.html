@@ -1,5 +1,5 @@
 {%load static %}
-<nav class="navbar navbar-expand-lg navbar-light " style="background:#19341a">
+<nav class="navbar navbar-expand-lg navbar-light " style="background:#7c8928;">
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,6 @@
 
   {% if user.is_authenticated %}
           <ul class="navbar-nav">
-
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" style="color:#ffffff" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ user.username }}
@@ -36,8 +35,8 @@
           </ul>
         {% else %}
           <form class="form-inline my-2 my-lg-0">
-            <a href="{% url 'Accounts:login' %}" class="btn btn-outline-secondary">Log in</a>
-            <a href="{% url 'Accounts:signup' %}" class="btn btn-primary ml-2">Sign up</a>
+            <a href="{% url 'Accounts:login' %}" class="btn btn-outline-secondary" style="color: #ffffff">Log in</a>
+            <a href="{% url 'Accounts:signup' %}" class="btn btn-primary ml-2" style="color: #ffffff">Sign up</a>
           </form>
         {% endif %}
 

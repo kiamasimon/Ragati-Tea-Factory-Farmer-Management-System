@@ -12,8 +12,15 @@
         <strong>Sign up</strong>
     </h5>
     <div class="card-body px-lg-5 pt-0">
-        <form class="text-center" style="color: #757575;" method="post" action="{%url 'Accounts:signup'%}">{% csrf_token %}
+        {% if messages %}
+                        <div class="alert alert-success">
+                            {% for m in messages %}
+                                <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</li>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
+        <form class="text-center" style="color: #757575;" method="post" action="{%url 'Accounts:signup'%}">{% csrf_token %}
             <br>
             <div class="md-form">
                 <div class="col">

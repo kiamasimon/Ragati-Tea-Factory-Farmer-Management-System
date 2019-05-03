@@ -14,7 +14,6 @@
           </div>
     </div>
   </div>
-
   <div class="col-sm-3" style="margin:auto; margin-top:20px;">
     <div class="card">
         <div class="card-header">
@@ -60,6 +59,7 @@
   </div>
 
 </div>
+
 
 {% block additional_scripts %}
 <script>
@@ -109,10 +109,10 @@ var sales = new Chart(ctx, {
     data: {
         labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
         datasets: [{
-            label: 'Farmer,Employee and Sales Analysis',
+            label: 'Monthly Sales Analysis',
             data: [
-            {%for month in s%}{%if month.month == 1%}{{month.monthly_sales}}{%endif%}{%endfor%},
-            {%for month in s%}{%if month.month == 2%}{{month.monthly_sales}}{%endif%}{%endfor%},
+            {% for month in s %} {%if month.month == 1%} {{month.monthly_sales}} {%endif%} {%endfor%},
+            {% for month in s%} {%if month.month == 2%} {{month.monthly_sales}} {%endif%} {%endfor%},
             {%for month in s%}{%if month.month == 3%}{{month.monthly_sales}}{%endif%}{%endfor%},
             {%for month in s%}{%if month.month == 4%}{{month.monthly_sales}}{%endif%}{%endfor%},
             {%for month in s%}{%if month.month == 5%}{{month.monthly_sales}}{%endif%}{%endfor%},

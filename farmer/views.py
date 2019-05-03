@@ -1,8 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Func, Sum
 from django.http import HttpResponse
 from django.shortcuts import render
-from accounts.models import Sale, Tea
+from accounts.models import Sale, Tea, Employee
 from employee.utils import render_to_pdf
 
 
@@ -10,21 +11,21 @@ def index(request):
      return render(request, 'farmer/index.html')
 
 
-#resolve week in a date
+# resolve week in a date
 class Week(Func):
     function = 'EXTRACT'
     template = '%(function)s(WEEK from %(expressions)s)'
     output_field = models.IntegerField()
 
 
-#resolve Month in a date
+# resolve Month in a date
 class Month(Func):
     function = 'EXTRACT'
     template = '%(function)s(MONTH from %(expressions)s)'
     output_field = models.IntegerField()
 
 
-#resolve Year in a date
+# resolve Year in a date
 class Year(Func):
     function = 'EXTRACT'
     template = '%(function)s(YEAR from %(expressions)s)'
@@ -54,10 +55,16 @@ def individual_sales(request):
 
 def tea_prices(request):
     tea = Tea.objects.all()
+    e = []
+    for t in tea:
+        employee = Employee.objects.get(user_ptr_id=t.employee)
+        user = User.objects.filter(id=employee.user_ptr_id)
+        e.append(user)
     tea_prices = tea.annotate(week=Week('created_at')).values('week', 'tea_type', 'price', 'created_at',
                                                               'employee').order_by("week")
     context = {
-        'tea_prices': tea_prices
+        'tea_prices': tea_prices,
+        'e': e,
     }
     return render(request, 'farmer/tea_prices.html', context)
 

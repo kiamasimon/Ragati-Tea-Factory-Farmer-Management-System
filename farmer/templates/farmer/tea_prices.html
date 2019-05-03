@@ -27,8 +27,11 @@
                           <td>{{ tea_price.tea_type}}</td>
                           <td>{{ tea_price.price }}</td>
                           <td>{{ tea_price.created_at }}</td>
-                          <td>{{ tea_price.employee}}</td>
+                          {% if tea.employee_id == e.id%}
+                          <td>{{user.first_name}} {{user.last_name}}</td>
+                          {%endif%}
                             </tr>
+
                       {%endfor%}
                       </tbody>
                     </table>

@@ -22,41 +22,37 @@
                         </div>
                     {% endif %}
                   <div class="table-flip-scroll">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Status</th>
-                          <th>Last Login</th>
-                          <th>Edit</th>
-                          <th>Date Joined</th>
+                          <th style="font-size: 14px">Name</th>
+                          <th style="font-size: 14px">Email</th>
+                          <th style="font-size: 14px">Status</th>
+                          <th style="font-size: 14px">Last Login</th>
+                          <th style="font-size: 14px">Date Joined</th>
                         </tr>
                       </thead>
                       <tbody>
                         {% for farmer in farmers %}
                             <tr>
-                                <td>{{ farmer.first_name }}</td>
-                                <td>{{ farmer.email }}</td>
-                                <td>
+                                <td style="font-size: 13px">{{ farmer.first_name }}</td>
+                                <td style="font-size: 13px">{{ farmer.email }}</td>
+                                <td style="font-size: 13px">
                                      {% if farmer.is_active %}
-                                         <a href="{% url 'Employee:deactivate_farmer' farmer.user_ptr_id %}" class="btn btn-danger">Deactivate</a>
+                                         <a href="{% url 'Employee:deactivate_farmer' farmer.user_ptr_id %}"  style="font-size: 13px" class="btn btn-danger">Deactivate</a>
                                      {% else %}
-                                         <a href="{% url 'Employee:activate_farmer' farmer.user_ptr_id %}" class="btn btn-success">Activate</a>
+                                         <a href="{% url 'Employee:activate_farmer' farmer.user_ptr_id %}" style="font-size: 13px" class="btn btn-success">Activate</a>
                                      {% endif %}
                                 </td>
 
-                                <td>
+                                <td style="font-size: 13px">
                                     {% if farmer.last_login == None %}
                                         Never Logged in
                                     {% else %}
                                         {{ farmer.last_login }}
                                     {% endif %}
-                                </td>
-                            <td>
-                                <a href=""><i class="fas fa-edit"></i></a>
-                            </td>
-                                <td>
+                                </td >
+                                <td style="font-size: 13px">
 
                                     {{ farmer.date_joined }}
                                 </td>

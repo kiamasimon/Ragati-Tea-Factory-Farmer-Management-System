@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login, get_user_model
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -46,7 +47,10 @@ def signup(request):
             raw_password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('')
+            return redirect('Farmer:my_sales')
+        else:
+            messages.error(request, 'Form Invalid')
+            return redirect('Accounts:signup')
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})

@@ -21,27 +21,27 @@
                         </div>
                     {% endif %}
                   <div class="table-flip-scroll">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
                       <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Day of Sale</th>
-                            <th>Kgs Sold</th>
-                            <th>Price per Kg</th>
-                            <th>Total in Ksh</th>
+                            <th style="font-size: 14px">Name</th>
+                            <th style="font-size: 14px">Email</th>
+                            <th style="font-size: 14px">Day of Sale</th>
+                            <th style="font-size: 14px">Kgs Sold</th>
+                            <th style="font-size: 14px">Price per Kg</th>
+                            <th style="font-size: 14px">Total in Ksh</th>
                         </tr>
                       </thead>
                       <tbody>
                         {% for farmer in farmer %}
                         {%for sale in sales %}
                             <tr>
-                                <td>{{ farmer.first_name }}</td>
-                                <td>{{ farmer.email }}</td>
-                                <td>{{ sale.created_at }}</td>
-                                <td>{{ sale.kg_of_tea}}</td>
-                                <td>{{ sale.unit_cost}}</td>
-                                <td>{{ sale.total}}</td>
+                                <td style="font-size: 13px">{{ farmer.first_name }}</td>
+                                <td style="font-size: 13px">{{ farmer.email }}</td>
+                                <td style="font-size: 13px">{{ sale.created_at }}</td>
+                                <td style="font-size: 13px">{{ sale.kg_of_tea}}</td>
+                                <td style="font-size: 13px">{{ sale.unit_cost}}</td>
+                                <td style="font-size: 13px">{{ sale.total}}</td>
                                 {%endfor%}
                                 {% endfor %}
                             </tr>
@@ -49,7 +49,7 @@
                       </tbody>
                     </table>
                   </div>
-                    <strong>Total</strong>
+                    <strong> {{ total_sum }} Ksh</strong>
                 </div>
               </div>
             </div>

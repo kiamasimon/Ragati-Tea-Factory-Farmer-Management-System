@@ -13,5 +13,12 @@ urlpatterns = [
     path('add_sale', views.add_sale, name='add_sale'),
     path('sign_up', views.admin_signup, name='sign_up'),
     path('tea_prices', views.tea_prices, name='tea_prices'),
-    path('add_tea_pricing', views.add_tea_pricing, name='add_tea_pricing')
+    path('add_tea_pricing', views.add_tea_pricing, name='add_tea_pricing'),
+    path('edit/tea/pricing/<int:tea_type_id>', views.edit_tea_pricing, name='edit_tea_pricing'),
+    path('profile', views.profile, name='profile'),
+    path('edit_profile/<int:user_id>', views.edit_profile, name='edit_profile'),
+    path('manage_employees', views.manage_employees, name='manage_employees'),
+    path('add_employee', views.add_employee, name='add_employee'),
+    path('de_activate/employee/<int:employee_id>', views.deactivate_employee, name='deactivate_employee'),
+    path('activate/employee/<int:employee_id>', views.activate_employee, name='activate_employee')
 ]

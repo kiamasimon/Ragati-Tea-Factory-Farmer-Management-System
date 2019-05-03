@@ -22,7 +22,26 @@
 
                       <form method="post" action="{%url 'Employee:add_tea_pricing'%}">
                           {%csrf_token%}
-                          {{form.as_ul}}
+                          <div class="form-group">
+                              <label for="tea_type">Tea Type</label>
+                              <select  id="tea_type" class="form-control" name="tea_type">
+                                  {% for t in tea %}
+                                  <option value="{{t.id}}">{{t.get_tea_type_display}}</option>
+                                  {% endfor %}
+                              </select>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="price">Price</label>
+                              <input type="number" id="price" class="form-control" name="price">
+                          </div>
+
+                          <div class="form-group">
+                              <label for="employee">Employee</label>
+                              <input type="text" id="employee" class="form-control" name="employee"
+                                     {% if user.id == employee.user_ptr_id %} value="{{user.username}}" {%endif%} disabled>
+                          </div>
+
                           <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Submit</button>
                       </form>
                   </div>

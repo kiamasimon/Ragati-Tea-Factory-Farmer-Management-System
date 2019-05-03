@@ -48,7 +48,7 @@ class Tea(models.Model):
         (DUST1, 'DUST1'),
     )
 
-    tea_type = models.IntegerField(choices=ANSWER_TYPE_CHOICES, default=BP1, blank=False, null=False)
+    tea_type = models.IntegerField(choices=ANSWER_TYPE_CHOICES, default=BP1, blank=True, null=True)
     price = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)

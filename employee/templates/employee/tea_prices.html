@@ -5,45 +5,55 @@
 
 {% block portal_content %}
 
-<div class="col-sm-3 float" style="margin:auto; margin-top:30px;">
+<div class="col-sm-3" style="margin:auto; margin-top:30px;">
               <div class="card">
                 <div class="card-header">
                     <form method="post" action="{%url 'Employee:add_tea_pricing'%}">
                         {%csrf_token%}
-                          <button class="btn btn-info my-2 btn-block float-right" style="width:auto;">Add Weekly Price</button>
+                          <button class="btn btn-info my-2 btn-block float-right" style="background-color: #0b2e13">Add Weekly Price</button>
                       </form>
                 </div>
               </div>
 </div>
 
-
-<div class="col-sm-10" style="margin:auto; margin-top:6px;">
-    {% regroup tea_prices by week as tea_prices_by_week%}
+{% regroup tea_prices by week as tea_prices_by_week%}
     {%for week in tea_prices_by_week%}
+<div class="col-sm-10" style="margin:auto; margin-top:6px;">
               <div class="card">
                 <div class="card-header">
-                    <strong>Tea prices for week {{week.grouper}} {% for tea_price in week.list%} {{tea_price.year}} {%endfor%}</strong>
+                    <strong style="font-size: 14px">Tea prices for week {{week.grouper}} {% for tea_price in week.list%}{%endfor%} 2019</strong>
                 </div>
 
                   <div class="card-body">
                       <div class="table-flip-scroll">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
                       <thead>
                         <tr>
-                            <th>Tea Type</th>
-                            <th>Price per Kg</th>
-                            <th>Date Updated</th>
-                            <th>Updated By</th>
+                            <th style="font-size: 14px">Tea Type</th>
+                            <th style="font-size: 14px">Price per Kg</th>
+                            <th style="font-size: 14px">Date Updated</th>
+                            <th style="font-size: 14px">Updated By</th>
+                            <th style="font-size: 14px">Edit</th>
                         </tr>
                       </thead>
                       <tbody>
+
+                      {% for t in tea %}
                       {% for tea_price in week.list%}
+                       {% if tea_price.tea_type == t.tea_type %}
                       <tr>
-                          <td>{{ tea_price.tea_type}}</td>
-                          <td>{{ tea_price.price }}</td>
-                          <td>{{ tea_price.created_at }}</td>
-                          <td>{{ tea_price.employee}}</td>
-                            </tr>
+                          <td style="font-size: 13px">{{ t.get_tea_type_display}}</td>
+                          <td style="font-size: 13px">{{ tea_price.price }}</td>
+                          <td style="font-size: 13px">{{ tea_price.created_at }}</td>
+                      {% for user in users %}
+                          {% if user.id == tea_price.employee %}
+                          <td style="font-size: 13px">{{user.first_name}} {{user.last_name}}</td>
+                          {% endif %}
+                      {% endfor %}
+                      <td style="font-size: 13px"><a href="{% url 'Employee:edit_tea_pricing' tea_price.id %}">Edit</a></td>
+                      </tr>
+                          {% endif %}
+                          {% endfor %}
                       {%endfor%}
                       </tbody>
                     </table>

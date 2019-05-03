@@ -28,31 +28,31 @@
                     <label for="farmer_id">Select a farmer</label>
                     <select class="form-control" name="farmer_id" id="farmer_id">
                         {%for farmer in farmers %}
-                        <option value="{{farmer.id}}">{{farmer.first_name}}</option>
+                        <option value="{{farmer.id}}">{{farmer.first_name}}  {{farmer.last_name}}</option>
                         {%endfor%}
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="kg_of_tea">Farmers Amount of Tea in Kgs</label>
-                    <input type="number" class="calc" id="kg_of_tea"  name="kg_of_tea" placeholder="Numbers Only">
+                    <input type="number" class="calc" id="kg_of_tea"  name="kg_of_tea" onchange="calculate()" placeholder="Numbers Only">
                 </div>
 
                 <div class="form-group">
                     <label for="unit_cost">Unit Cost(Ksh)</label>
-                    <input type="number" class="calc"  id="unit_cost" name="unit_cost" placeholder="Numbers Only">
+                    <input type="number" class="calc"  id="unit_cost" name="unit_cost" onchange="calculate()" placeholder="Numbers Only">
                 </div>
 
                 <div class="form-group">
                     <label for="total">Total</label>
-                    <input type="number" class="form-control" onchange="calculateAmount(value1,value2)" id="total" name="total" placeholder="Numbers Only">
+                    <input type="number" class="form-control"  id="total" name="total" placeholder="Numbers Only" readonly>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="farmer_id">Select a farmer</label>
+                    <label for="farmer_id">Employee</label>
                     <select class="form-control" name="employee_id" id="employee_id">
-                        <option value="{{user.id}}">{{user.first_name}}</option>
+                        <option value="{{user.id}}" {% if user.id == employee.user_ptr_id %} selected {%endif%}>{{user.first_name}}</option>
                     </select>
                 </div>
 
@@ -64,11 +64,10 @@
 
 {% block additional_scripts %}
 <script>
-function calculateAmount(val1,val2)
-{ var tot_price = val1 * val2;
-//display the result
-var divobj = document.getElementById('total');
-divobj.value = tot_price;
+calculate = function () {
+    var tea_amount = document.getElementById('kg_of_tea').value;
+    var unit_cost = document.getElementById('unit_cost').value;
+    document.getElementById('total').value = parseInt(tea_amount)*parseInt(unit_cost);
 }
 </script>
 {% endblock %}
